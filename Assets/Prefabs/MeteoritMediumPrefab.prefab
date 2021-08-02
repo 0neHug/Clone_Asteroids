@@ -61,7 +61,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -94,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf47eb45a478fe4390fd26051a1c83e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedObject: 1
+  speedObject: 5
   directionVector: {x: 0, y: 0, z: 0}
   colisionDestance: 0.5
   meteoriteMediumPrefab: {fileID: 0}
