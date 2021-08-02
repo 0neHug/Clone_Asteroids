@@ -32,6 +32,8 @@ public class FireHero : MonoBehaviour
 
     bool canLaserAttack;
     bool canLaserReload = false;
+
+    bool _isFire = false;
     void Start()
     {
 
@@ -41,28 +43,36 @@ public class FireHero : MonoBehaviour
 
     private IEnumerator NewBullet()
     {
-        if (Input.GetKey(KeyCode.Space) == true)
+        if (Input.GetKey(KeyCode.Space) == true && _isFire == false)
         {
+            _isFire = true;
+
             Instantiate(BulletPrefab, transform.position + transform.up / 5, transform.rotation);
             yield return new WaitForSeconds(coolDownSpawnBullet);
+            _isFire = false;
         }
-        if (Input.GetKeyDown(KeyCode.X) == true && canLaserReload == false)
+        if (Input.GetKeyDown(KeyCode.X) == true && canLaserReload == false && _isFire == false)
         {
+
+            _isFire = true;
             canLaserAttack = true;
             StartCoroutine(LaserAttack());
         }
             if (canLaserAttack == true)
             {
-            
+                
                 laserTracker.transform.position = transform.up * trackerToHeroDistance + transform.position;
                 laserTracker.transform.rotation = transform.rotation;
                 laserTracker.SetActive(true);
                 for (int i = 0; i <= 25; i++)
                 {
                     Instantiate(LaserPrefab, transform.position + transform.up * i/3, transform.rotation);
-                    yield return new WaitForSeconds(coolDownSpawnLaser);
+                    
                 }
+
+            yield return new WaitForSeconds(coolDownSpawnLaser);
             
+
             }
             else
             {
@@ -83,6 +93,7 @@ public class FireHero : MonoBehaviour
     {
         
         yield return new WaitForSeconds(lasetAttackTime);
+        _isFire = false;
         StartCoroutine(LaserReload());
 
     }
